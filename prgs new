@@ -1,0 +1,58 @@
+package org;
+import java.util.Scanner;
+
+public class Knapsackgreedyapproach {
+
+	public static void main(String[] args) {
+		int n,i,j=0,m;
+		float max,rc=0,profit=0,x;
+		
+		int p[]=new int[50];
+		int w[]=new int[50];
+		Scanner sc=new Scanner(System.in);
+		
+		System.out.println("Enter the no of obj:");
+		n=sc.nextInt();
+		
+		System.out.println("Enter the weight of each bag:");
+		for(i=1;i<=n;i++)
+			w[i]=sc.nextInt();
+		
+		System.out.println("Enter the profit of each obj:");
+		for(i=1;i<=n;i++)
+			p[i]=sc.nextInt();
+		
+		System.out.println("Enter the max capacity of Knapsack:");
+		 m=sc.nextInt();
+		 rc=m;
+		
+		while(rc>0) {
+			max=0;
+			for(i=1;i<=n;i++) {
+				if(((float)p[i])/((float)w[i])>max) {
+					max=((float)p[i])/((float)w[i]);
+					j=i;
+					
+				}
+			}
+			if(w[j]<=rc) {
+				System.out.println("object number:"+ j +"of weight added is"+ w[j]);
+				profit=profit+p[j];
+				rc=rc-w[j];
+				p[j]=0;
+				
+				
+			}else {
+				System.out.println("object number:"+ j +"of weight added is"+ rc);
+				x=rc/w[j];
+				profit=profit+(p[j]*x);
+				rc=0;
+				
+			}
+		}
+		System.out.println("the total profit is"+profit);
+		sc.close();
+
+	}
+
+}
